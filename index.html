@@ -1106,7 +1106,7 @@
                 <input type="hidden" name="_subject" value="New inquiry from Green Marbles website">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_next" value="?success=true">
+                <input type="hidden" name="_next" id="form-next-url" value="">
                 
                 <div class="grid md:grid-cols-2 gap-6">
                   <div>
@@ -1283,6 +1283,15 @@
         showPage('thankyou');
       });
     }
+
+    // Set the form redirect URL dynamically (FormSubmit requires absolute URL)
+    document.addEventListener('DOMContentLoaded', function() {
+      const nextUrlInput = document.getElementById('form-next-url');
+      if (nextUrlInput) {
+        const currentUrl = window.location.origin + window.location.pathname;
+        nextUrlInput.value = currentUrl + '?success=true';
+      }
+    });
 
     // Page Navigation
     function showPage(pageName) {
